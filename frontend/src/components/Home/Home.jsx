@@ -3,7 +3,7 @@ import RotatingText from "./HeroText/HerotextLogic";
 import SpotlightCard from "./FeatureCard/FeatureCardLogic";
 import { Sparkles } from "lucide-react";
 import CircularGallery from "./Gallery/GalleryLogic";
-// import GeminiAgent from "../GeminiAgent/GeminiAgent";
+import GeminiAgent from "../GeminiAgent/GeminiAgent";
 import IconsCards from './Icons/IconsLogic';
 import { useCalmMode } from '../Providers/CalmModeContext';
 import Img3 from '../../assets/Journal Icon.png'
@@ -264,7 +264,7 @@ const Home = () => {
                 </button>
                 </SpotlightCard>
             </div>
-            {/* <GeminiAgent></GeminiAgent> */}
+            <GeminiAgent></GeminiAgent>
         </div>
     );
 };
