@@ -5,31 +5,30 @@ import c from "classnames";
 
 const lineCount = 3;
 
-export type AudioPulseProps = {
-  active: boolean;
-  volume: number;
-  hover?: boolean;
-};
-
-export default function AudioPulse({ active, volume, hover }: AudioPulseProps) {
-  const lines = useRef<HTMLDivElement[]>([]);
+export default function AudioPulse({ active, volume, hover }) {
+  const linesRef = useRef([]);
 
   useEffect(() => {
-    let timeout: number | null = null;
+    let timeout = null;
     const update = () => {
-      lines.current.forEach(
-        (line, i) =>
-        (line.style.height = `${Math.min(
-          24,
-          4 + volume * (i === 1 ? 400 : 60),
-        )}px`),
+      linesRef.current.forEach(
+        (line, i) => {
+          if (line) {
+            line.style.height = `${Math.min(
+              24,
+              4 + volume * (i === 1 ? 400 : 60),
+            )}px`;
+          }
+        }
       );
       timeout = window.setTimeout(update, 100);
     };
 
     update();
 
-    return () => clearTimeout((timeout as number)!);
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
   }, [volume]);
 
   return (
@@ -39,7 +38,7 @@ export default function AudioPulse({ active, volume, hover }: AudioPulseProps) {
         .map((_, i) => (
           <div
             key={i}
-            ref={(el) => (lines.current[i] = el!)}
+            ref={(el) => (linesRef.current[i] = el)}
             style={{ animationDelay: `${i * 133}ms` }}
           />
         ))}
