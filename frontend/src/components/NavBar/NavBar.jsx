@@ -196,7 +196,7 @@ const NavBar = () => {
                   <div className="py-1 animate-fadeIn">
                     <div className="relative" onMouseEnter={() => showTooltip('journal')} onMouseLeave={hideTooltip}>
                       <Link 
-                        to="/Journalboard" 
+                        to="/Journal" 
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         onMouseEnter={() => isAudioDescriptionEnabled && speakText("Journal for documenting thoughts and feelings")}
                       >Journal</Link>
@@ -402,7 +402,7 @@ const NavBar = () => {
               {activeDropdown === 'mobile-insighthub' && (
                 <div className="mt-2 pl-4 border-l border-gray-300 animate-fadeIn">
                   <ul className="space-y-2">
-                    <li><Link to="/Journalboard" onClick={() => setIsMenuOpen(false)}>Journal</Link></li>
+                    <li><Link to="/Journal" onClick={() => setIsMenuOpen(false)}>Journal</Link></li>
                     <li><Link to="/Tracker" onClick={() => setIsMenuOpen(false)}>Tracker</Link></li>
                     <li><Link to="/FeelReader" onClick={() => setIsMenuOpen(false)}>Feel Reader</Link></li>
                   </ul>
