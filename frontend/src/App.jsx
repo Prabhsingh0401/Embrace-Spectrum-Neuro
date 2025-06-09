@@ -9,6 +9,7 @@ import GeminiLive from './components/GeminiLive/GeminiLive'
 import SpeechCoach from './components/SpeechCoach/SpeechCoach'
 import JournalBoard from './components/JournalBoard/JournalBoard'
 import LifeSkillTracker from './components/LifeSkillTracker/LifeSkillTracker'
+import Learnpath from './components/LearningPath/AllLearnpath'
 
 function App() {
   const { isCalmMode } = useCalmMode();
@@ -25,6 +26,7 @@ function App() {
           <Route path="/speechcoach" element={<SpeechCoach />} />
           <Route path="/journal" element={<JournalBoard />} />
           <Route path="/tracker" element={<LifeSkillTracker />} />
+          <Route path="/learn" element={<Learnpath />} />
         </Routes>
       </Router>
     </div>
