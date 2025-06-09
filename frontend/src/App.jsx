@@ -6,6 +6,7 @@ import { useCalmMode } from './components/Providers/CalmModeContext'
 import { useAudioDescription } from './components/AudioDescription/AudioDescriptionContext'
 import NavBar from './components/NavBar/NavBar'
 import Chatbot from './components/Chatbot/Chatbot'
+import GeminiLive from './components/GeminiLive/GeminiLive'
 
 function App() {
   const { isCalmMode } = useCalmMode();
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/chatbot" element={<Chatbot />} />
+          <Route path="/geminilive" element={<GeminiLive />} />
         </Routes>
       </Router>
     </div>
