@@ -5,7 +5,6 @@ import { Altair } from "./components/altair/Altair";
 import ControlTray from "./components/control-tray/ControlTray";
 import HaloEffect from "./components/Halo Effect/HaloEffect";
 import cn from "classnames";
-import { Link } from "react-router-dom";
 import { useAudioDescription } from "../AudioDescription/AudioDescriptionContext";
 
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
