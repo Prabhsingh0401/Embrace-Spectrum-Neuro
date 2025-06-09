@@ -8,6 +8,7 @@ import Chatbot from './components/Chatbot/Chatbot'
 import GeminiLive from './components/GeminiLive/GeminiLive'
 import SpeechCoach from './components/SpeechCoach/SpeechCoach'
 import JournalBoard from './components/JournalBoard/JournalBoard'
+import LifeSkillTracker from './components/LifeSkillTracker/LifeSkillTracker'
 
 function App() {
   const { isCalmMode } = useCalmMode();
@@ -23,6 +24,7 @@ function App() {
           <Route path="/geminilive" element={<GeminiLive />} />
           <Route path="/speechcoach" element={<SpeechCoach />} />
           <Route path="/journal" element={<JournalBoard />} />
+          <Route path="/tracker" element={<LifeSkillTracker />} />
         </Routes>
       </Router>
     </div>
