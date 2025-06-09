@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Home from './components/Home/Home'
-import { useUser } from '@clerk/clerk-react'
 import { useCalmMode } from './components/Providers/CalmModeContext'
 import { useAudioDescription } from './components/AudioDescription/AudioDescriptionContext'
 import NavBar from './components/NavBar/NavBar'
 import Chatbot from './components/Chatbot/Chatbot'
 import GeminiLive from './components/GeminiLive/GeminiLive'
+import SpeechCoach from './components/SpeechCoach/SpeechCoach'
 
 function App() {
   const { isCalmMode } = useCalmMode();
@@ -20,6 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/chatbot" element={<Chatbot />} />
           <Route path="/geminilive" element={<GeminiLive />} />
+          <Route path="/speechcoach" element={<SpeechCoach />} />
         </Routes>
       </Router>
     </div>
