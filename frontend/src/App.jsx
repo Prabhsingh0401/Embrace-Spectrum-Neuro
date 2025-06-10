@@ -13,6 +13,8 @@ import Learnpath from './components/LearningPath/AllLearnpath'
 import SentimentAnalyser from './components/FeelReader/SentimentAnalyser'
 import PaintAndStory from './components/SketchTales/StoryGeneratorComponent'
 import Games from './components/Games/Games'
+import SenseScape from './components/Games/SenseScape'
+import MoodBooster from './components/Games/MoodBooster'
 
 function App() {
   const { isCalmMode } = useCalmMode();
@@ -33,6 +35,8 @@ function App() {
           <Route path="/feelreader" element={<SentimentAnalyser />} />
           <Route path="/sketchtales" element={<PaintAndStory />} />
           <Route path="/games" element={<Games />} />
+          <Route path="/sensescape" element={<SenseScape />} />
+          <Route path="/moodbooster" element={<MoodBooster />} />
         </Routes>
       </Router>
     </div>
