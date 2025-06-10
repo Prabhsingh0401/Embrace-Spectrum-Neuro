@@ -10,6 +10,7 @@ import SpeechCoach from './components/SpeechCoach/SpeechCoach'
 import JournalBoard from './components/JournalBoard/JournalBoard'
 import LifeSkillTracker from './components/LifeSkillTracker/LifeSkillTracker'
 import Learnpath from './components/LearningPath/AllLearnpath'
+import SentimentAnalyser from './components/FeelReader/SentimentAnalyser'
 
 function App() {
   const { isCalmMode } = useCalmMode();
@@ -27,6 +28,7 @@ function App() {
           <Route path="/journal" element={<JournalBoard />} />
           <Route path="/tracker" element={<LifeSkillTracker />} />
           <Route path="/learn" element={<Learnpath />} />
+          <Route path="/feelreader" element={<SentimentAnalyser />} />
         </Routes>
       </Router>
     </div>
