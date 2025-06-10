@@ -15,6 +15,7 @@ import PaintAndStory from './components/SketchTales/StoryGeneratorComponent'
 import Games from './components/Games/Games'
 import SenseScape from './components/Games/SenseScape'
 import MoodBooster from './components/Games/MoodBooster'
+import LifeSkillsQuiz from './components/Quiz/LifeSkillsQuiz'
 
 function App() {
   const { isCalmMode } = useCalmMode();
@@ -37,6 +38,7 @@ function App() {
           <Route path="/games" element={<Games />} />
           <Route path="/sensescape" element={<SenseScape />} />
           <Route path="/moodbooster" element={<MoodBooster />} />
+          <Route path="/quiz" element={<LifeSkillsQuiz />} />
         </Routes>
       </Router>
     </div>
