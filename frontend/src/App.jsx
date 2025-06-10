@@ -11,6 +11,7 @@ import JournalBoard from './components/JournalBoard/JournalBoard'
 import LifeSkillTracker from './components/LifeSkillTracker/LifeSkillTracker'
 import Learnpath from './components/LearningPath/AllLearnpath'
 import SentimentAnalyser from './components/FeelReader/SentimentAnalyser'
+import PaintAndStory from './components/SketchTales/StoryGeneratorComponent'
 
 function App() {
   const { isCalmMode } = useCalmMode();
@@ -29,6 +30,7 @@ function App() {
           <Route path="/tracker" element={<LifeSkillTracker />} />
           <Route path="/learn" element={<Learnpath />} />
           <Route path="/feelreader" element={<SentimentAnalyser />} />
+          <Route path="/sketchtales" element={<PaintAndStory />} />
         </Routes>
       </Router>
     </div>
