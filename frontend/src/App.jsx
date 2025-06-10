@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import './App.css'
 import Home from './components/Home/Home'
 import { useCalmMode } from './components/Providers/CalmModeContext'
@@ -27,23 +27,34 @@ function App() {
   const { isSignedIn, user, isLoaded } = useUser();
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [checking, setChecking] = useState(true);
+  const navigate = useNavigate ? useNavigate() : null;
+  const location = useLocation ? useLocation() : null;
 
   useEffect(() => {
     if (!isLoaded) return;
     if (isSignedIn && user) {
       const onboarded = localStorage.getItem(`onboarding-${user.id}`);
-      setShowOnboarding(!onboarded);
+      if (!onboarded) {
+        setShowOnboarding(true);
+        if (location && location.pathname !== '/onboarding') {
+          navigate && navigate('/onboarding');
+        }
+      } else {
+        setShowOnboarding(false);
+        if (location && location.pathname === '/onboarding') {
+          navigate && navigate('/');
+        }
+      }
     } else {
       setShowOnboarding(false);
+      if (location && location.pathname === '/onboarding') {
+        navigate && navigate('/');
+      }
     }
     setChecking(false);
-  }, [isSignedIn, user, isLoaded]);
+  }, [isSignedIn, user, isLoaded, location, navigate]);
 
-  if (checking) return null; 
-
-  if (showOnboarding && isSignedIn && user) {
-    return <OnboardingForm onComplete={() => setShowOnboarding(false)} />;
-  }
+  if (checking) return null;
 
   return (
     <div className={`${isCalmMode ? 'calm-mode' : ''} ${isAudioDescriptionEnabled ? 'audio-description-enabled' : ''}`}>
@@ -51,6 +62,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/onboarding" element={<OnboardingForm onComplete={() => { setShowOnboarding(false); navigate && navigate('/'); }} />} />
           <Route path="/chatbot" element={<Chatbot />} />
           <Route path="/geminilive" element={<GeminiLive />} />
           <Route path="/speechcoach" element={<SpeechCoach />} />
