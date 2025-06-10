@@ -105,6 +105,16 @@ Try the live version of Embrace Spectrum:
 🔗 [https://embrace-spectrum-neuro.vercel.app/]
 
 ---
+## 🌐 Video Link and Presentation
+
+Check out the demo video of Embrace Spectrum:  
+🔗 [https://youtu.be/6Epqs02CvBA/]
+
+Check out the presentation of Embrace Spectrum:  
+🔗 [https://shorturl.at/6hEyK]
+---
+
+
 
 ## 🧑‍💻 Developer Experience & Complexity
 
