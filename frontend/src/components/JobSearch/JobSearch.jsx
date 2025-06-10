@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, MapPin, Briefcase, Heart, Settings, Search, Loader2, BookOpen, Award, Users, Clock, Home, Wifi, Plus, X } from 'lucide-react';
 import { useUser } from '@clerk/clerk-react';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
-import {db, auth} from '../../../firebase'
+import {db} from '../../../firebase'
 
 const JobSearch = () => {
   const { isLoaded, user } = useUser();
