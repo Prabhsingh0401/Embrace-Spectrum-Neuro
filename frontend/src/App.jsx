@@ -30,27 +30,57 @@ function App() {
   const location = useLocation();
   const [onboardingComplete, setOnboardingComplete] = useState(false);
   const [checkingOnboarding, setCheckingOnboarding] = useState(true);
+  const [onboardingError, setOnboardingError] = useState(null);
+  const [hasCheckedOnce, setHasCheckedOnce] = useState(false);
 
   useEffect(() => {
     const checkOnboardingFirestore = async () => {
       if (isLoaded && user) {
         setCheckingOnboarding(true);
-        const docRef = doc(db, 'onboardingData', user.id);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setOnboardingComplete(true);
-        } else {
-          setOnboardingComplete(false);
+        setOnboardingError(null);
+        try {
+          const docRef = doc(db, 'onboardingData', user.id);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            setOnboardingComplete(true);
+          } else {
+            setOnboardingComplete(false);
+          }
+        } catch (err) {
+          setOnboardingError('Error checking onboarding: ' + err.message);
         }
         setCheckingOnboarding(false);
+        setHasCheckedOnce(true);
+      } else if (isLoaded && !user) {
+        setCheckingOnboarding(false);
+        setOnboardingComplete(false);
+        setHasCheckedOnce(false);
       }
     };
     checkOnboardingFirestore();
   }, [isLoaded, user]);
 
-  if (checkingOnboarding) return null;
+  if (checkingOnboarding) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <span style={{ color: '#6488e9', fontWeight: 'bold', fontSize: 24 }}>Loading...</span>
+      </div>
+    );
+  }
 
-  if (isLoaded && user && !onboardingComplete && location.pathname !== '/onboarding') {
+  if (onboardingError) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'red' }}>
+        <div>
+          <h2>Onboarding Error</h2>
+          <p>{onboardingError}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Only redirect to onboarding if user is signed in, onboarding is not complete, and we have checked at least once
+  if (isLoaded && user && !onboardingComplete && location.pathname !== '/onboarding' && hasCheckedOnce) {
     return <Navigate to="/onboarding" replace />;
   }
 
@@ -59,8 +89,6 @@ function App() {
       {location.pathname !== '/onboarding' && <NavBar />}
       <Routes>
         <Route path="/onboarding" element={<OnboardingForm onComplete={async () => {
-          if (user) {
-          }
           setOnboardingComplete(true);
           return <Navigate to="/" replace />;
         }} />} />
