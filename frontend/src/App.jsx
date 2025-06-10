@@ -20,48 +20,60 @@ import JobSearch from './components/JobSearch/JobSearch'
 import { useUser } from '@clerk/clerk-react';
 import { useEffect, useState } from 'react';
 import OnboardingForm from './components/OnboardingForm/OnboardingForm'
+import { getDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 function App() {
   const { isCalmMode } = useCalmMode();
   const { isAudioDescriptionEnabled } = useAudioDescription();
   const { isSignedIn, user, isLoaded } = useUser();
-  const [showOnboarding, setShowOnboarding] = useState(false);
   const [checking, setChecking] = useState(true);
-  const navigate = useNavigate ? useNavigate() : null;
-  const location = useLocation ? useLocation() : null;
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    if (!isLoaded) return;
-    if (isSignedIn && user) {
-      const onboarded = localStorage.getItem(`onboarding-${user.id}`);
-      if (!onboarded) {
-        setShowOnboarding(true);
-        if (location && location.pathname !== '/onboarding') {
-          navigate && navigate('/onboarding');
+    async function checkOnboarding() {
+      if (!isLoaded) return;
+      if (isSignedIn && user) {
+        let onboarded = localStorage.getItem(`onboarding-${user.id}`);
+        if (!onboarded) {
+          try {
+            const docRef = doc(db, 'onboardingData', user.id);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+              onboarded = 'true';
+              localStorage.setItem(`onboarding-${user.id}`, 'true');
+            }
+          } catch (e) {
+          }
+        }
+        if (!onboarded) {
+          setShowOnboarding(true);
+          if (location.pathname !== '/onboarding') navigate('/onboarding');
+        } else {
+          setShowOnboarding(false);
+          if (location.pathname === '/onboarding') navigate('/');
         }
       } else {
         setShowOnboarding(false);
-        if (location && location.pathname === '/onboarding') {
-          navigate && navigate('/');
-        }
+        if (location.pathname === '/onboarding') navigate('/');
       }
-    } else {
-      setShowOnboarding(false);
-      if (location && location.pathname === '/onboarding') {
-        navigate && navigate('/');
-      }
+      setChecking(false);
     }
-    setChecking(false);
-  }, [isSignedIn, user, isLoaded, location, navigate]);
+    checkOnboarding();
+  }, [isSignedIn, user, isLoaded, location.pathname]);
 
   if (checking) return null;
 
+  const showNavBar = location.pathname !== '/onboarding';
+
   return (
     <div className={`${isCalmMode ? 'calm-mode' : ''} ${isAudioDescriptionEnabled ? 'audio-description-enabled' : ''}`}>
-      <NavBar />
+      {showNavBar && <NavBar />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/onboarding" element={<OnboardingForm onComplete={() => { setShowOnboarding(false); navigate && navigate('/'); }} />} />
+        <Route path="/onboarding" element={<OnboardingForm onComplete={() => { setShowOnboarding(false); navigate('/'); }} />} />
         <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/geminilive" element={<GeminiLive />} />
         <Route path="/speechcoach" element={<SpeechCoach />} />
@@ -77,7 +89,7 @@ function App() {
         <Route path="/jobs" element={<JobSearch />} />
       </Routes>
     </div>
-  )
+  );
 }
 
 export default App
