@@ -166,8 +166,7 @@ const JobSearch = () => {
 
       console.log('Sending request to backend:', requestPayload);
 
-      // Make request to your backend server
-      const API_BASE_URL = 'http://localhost:3000';
+      const API_BASE_URL = 'https://embrace-spectrum.onrender.com';
       const response = await fetch(`${API_BASE_URL}/api/search-jobs`, {
         method: 'POST',
         headers: {

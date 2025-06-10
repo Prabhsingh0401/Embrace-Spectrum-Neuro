@@ -245,7 +245,7 @@ Guidelines:
     setErrorMessage("");
 
     try {
-      const response = await axios.post("http://localhost:3000/api/learn", {
+      const response = await axios.post("https://embrace-spectrum.onrender.com/api/learn", {
         message: formatDataToString(),
       });
 

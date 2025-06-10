@@ -26,7 +26,7 @@ function StoryGenerator({ getCanvasImage }) {
           prompt: "Write a children's story with a title about this drawing. Include relevant emojis in the story text and dont add other details just provide the story." 
         };
   
-        const response = await axios.post("http://localhost:3000/generate-story", requestData);
+        const response = await axios.post("https://embrace-spectrum.onrender.com/generate-story", requestData);
   
         if (response.data && response.data.story) {
           const storyText = response.data.story;
