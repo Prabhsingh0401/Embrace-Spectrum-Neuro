@@ -107,11 +107,12 @@ Try the live version of Embrace Spectrum:
 ---
 ## 🌐 Video Link and Presentation
 
+Check out the Presentation of Embrace Spectrum:
+🔗 [https://shorturl.at/6hEyK]
+
 Check out the demo video of Embrace Spectrum:  
 🔗 [https://youtu.be/6Epqs02CvBA/]
 
-Check out the presentation of Embrace Spectrum:  
-🔗 [https://shorturl.at/6hEyK]
 ---
 
 
