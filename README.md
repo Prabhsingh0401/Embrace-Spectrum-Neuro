@@ -116,6 +116,3 @@ Try the live version of Embrace Spectrum:
 - 🧹 **Accessibility First** – ARIA roles, keyboard navigation, and screen reader support throughout.
 - 🛡️ **Security** – All sensitive operations protected by authentication and Firestore rules.
 - 🔄 **Sync & Persistence** – User progress, onboarding, and preferences are synced across devices.
-
----
-
