@@ -17,10 +17,33 @@ import SenseScape from './components/Games/SenseScape'
 import MoodBooster from './components/Games/MoodBooster'
 import LifeSkillsQuiz from './components/Quiz/LifeSkillsQuiz'
 import JobSearch from './components/JobSearch/JobSearch'
+import { useUser } from '@clerk/clerk-react';
+import { useEffect, useState } from 'react';
+import OnboardingForm from './components/OnboardingForm/OnboardingForm'
 
 function App() {
   const { isCalmMode } = useCalmMode();
   const { isAudioDescriptionEnabled } = useAudioDescription();
+  const { isSignedIn, user, isLoaded } = useUser();
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [checking, setChecking] = useState(true);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+    if (isSignedIn && user) {
+      const onboarded = localStorage.getItem(`onboarding-${user.id}`);
+      setShowOnboarding(!onboarded);
+    } else {
+      setShowOnboarding(false);
+    }
+    setChecking(false);
+  }, [isSignedIn, user, isLoaded]);
+
+  if (checking) return null; 
+
+  if (showOnboarding && isSignedIn && user) {
+    return <OnboardingForm onComplete={() => setShowOnboarding(false)} />;
+  }
 
   return (
     <div className={`${isCalmMode ? 'calm-mode' : ''} ${isAudioDescriptionEnabled ? 'audio-description-enabled' : ''}`}>
