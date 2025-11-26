@@ -9,7 +9,7 @@ Embrace Spectrum is an inclusive, AI-powered platform designed to empower neurod
 - 💬 **Solace** – Gemini-powered AI chatbot for emotional support and daily check-ins.
 - 🗣️ **Human Connect** – Real-time human-like communication using Gemini Live.
 - 🧠 **Speech Coach** – Practice and receive feedback on speech, tone, and clarity with live metrics and filler word detection.
-- 📄 **Feel Reader** – Emotion detection in PDFs and documents, with sentiment analysis and visual feedback.
+- 📄 **Feel Reader** – Emotion and sentiment analysis for PDF documents using Gemini’s multimodal capabilities.
 - 🎨 **SketchTales** – Turn drawings into AI-generated stories, fostering creativity and self-expression.
 - 📔 **Journal** – Mood tracking, reflection, and gratitude journaling with a calming, accessible UI.
 - 🏆 **Life Skill Tracker** – Personalized daily tasks, XP, badges, and progress tracking for building life skills.
